@@ -1,0 +1,23 @@
+name: Feature request
+description: Propose a specific change to the updater.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What action or limitation causes the problem?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed behavior
+      description: Describe what the tool should do, including when the action should happen.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current workaround
+      description: What do you do now, and why is that insufficient?
