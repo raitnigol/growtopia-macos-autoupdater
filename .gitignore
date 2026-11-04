@@ -1,0 +1,17 @@
+❯ cat .gitignore
+dist/
+build/
+__pycache__/
+*.pyc
+.DS_Store
+*.dmg
+*.ips
+*.crash
+*.log
+*.scpt
+.env
+.env.*
+Bootstrap/toolchain/
+Bootstrap/launcher-x86_64
+Bootstrap/launcher-aarch64
+Bootstrap/GrowtopiaLauncher
