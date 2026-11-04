@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Installation and troubleshooting
+    url: https://github.com/raitnigol/growtopia-macos-autoupdater/blob/main/docs/troubleshooting.md
+    about: Check the documented controls and known failure cases before opening an issue.
+  - name: Security reporting guidance
+    url: https://github.com/raitnigol/growtopia-macos-autoupdater/blob/main/SECURITY.md
+    about: Review how to report security-sensitive information without posting secrets publicly.
