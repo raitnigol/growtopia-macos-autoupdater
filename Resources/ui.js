@@ -169,7 +169,17 @@ function openLog(){var p=home()+'/Library/Logs/Growtopia Launcher.log';if(!exist
 function quitRequested(){if(!GT.task)return true;if(alert('An operation is running','Cancel it safely and close the launcher once the current safe step finishes?','Cancel and Quit','Keep Open')){GT.pendingQuit=true;requestCancel();}return false;}
 function configureCallbacks(){
     ObjC.registerSubclass({name:'GTNativeController',superclass:'NSObject',protocols:['NSApplicationDelegate','NSWindowDelegate'],methods:{
-        'tick:':{types:['void',['id']],implementation:function(){if(GT.smoke){appendUILog('UI smoke test passed');GT.timer.invalidate;GT.window.orderOut($());GT.app.stop($());return;}pollWorker();}},
+        'tick:':{types:['void',['id']],implementation:function(){
+            if(GT.smoke){
+                appendUILog('UI smoke test passed');GT.timer.invalidate;GT.window.orderOut($());GT.app.stop($());
+                // stop: called from a timer needs an event to wake the AppKit loop.
+                GT.app.postEventAtStart($.NSEvent.otherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(
+                    $.NSApplicationDefined,$.NSMakePoint(0,0),0,0,0,$(),0,0,0
+                ),true);
+                return;
+            }
+            pollWorker();
+        }},
         'check:':{types:['void',['id']],implementation:function(){startMode('inspect');}},
         'play:':{types:['void',['id']],implementation:function(){startMode('play');}},
         'launch:':{types:['void',['id']],implementation:function(){startMode('launch');}},
