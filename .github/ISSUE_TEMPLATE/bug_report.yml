@@ -1,0 +1,98 @@
+name: Bug report
+description: Report an installation, update, launch, or interface failure.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read the troubleshooting guide first: https://github.com/raitnigol/growtopia-macos-autoupdater/blob/main/docs/troubleshooting.md
+        Do not post passwords, tokens, cookies, raw game preference files, serial numbers, or unreviewed logs. A security-sensitive report needs a private route described in SECURITY.md.
+  - type: input
+    id: launcher_version
+    attributes:
+      label: Launcher version
+      description: Version shown in the launcher window or release you downloaded.
+      placeholder: "2.1.0"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and build
+      description: Use sw_vers or the repository diagnostic script.
+      placeholder: "Version and build exactly as reported by your Mac"
+    validations:
+      required: true
+  - type: dropdown
+    id: architecture
+    attributes:
+      label: Processor architecture
+      options:
+        - Apple Silicon (arm64)
+        - Intel (x86_64)
+        - Unknown
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Hardware model identifier
+      description: The output of sysctl -n hw.model. Do not include a serial number or hardware UUID.
+      placeholder: "Mac16,8"
+  - type: dropdown
+    id: source
+    attributes:
+      label: Download source
+      options:
+        - In-game Ubisoft CDN
+        - Official website beta
+        - Not applicable / app fails before selection
+    validations:
+      required: true
+  - type: dropdown
+    id: trust
+    attributes:
+      label: Growtopia-only trust setting
+      options:
+        - Unchecked / normal macOS checks
+        - Checked / trust official Growtopia downloads
+        - Not applicable / unknown
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Name the exact button or action, expected result, and actual result.
+      placeholder: |
+        1. Open the launcher.
+        2. Click ...
+        Expected:
+        Actual:
+    validations:
+      required: true
+  - type: input
+    id: game_versions
+    attributes:
+      label: Growtopia versions before and after
+      description: Use the version shown inside the game when possible; note separately if it is only bundle metadata.
+      placeholder: "Before / after / not applicable"
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Environment information
+      description: Choose Growtopia Launcher → Copy Diagnostics in the menu bar, or run /bin/bash scripts/diagnostics.sh from a source checkout. Review the output before posting. Do not paste a full system_profiler dump.
+      render: text
+  - type: textarea
+    id: error
+    attributes:
+      label: Error, relevant log excerpt, or crash stack
+      description: Include the exact error. For a crash, include Exception Type, Termination Reason, and the crashed thread's stack. Remove private data before posting.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Optional. Crop to the relevant UI and remove credentials, account data, private paths, and unrelated notifications.
