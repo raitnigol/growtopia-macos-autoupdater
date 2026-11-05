@@ -168,7 +168,7 @@ function removeInstallers() {
 function openLog(){var p=home()+'/Library/Logs/Growtopia Launcher.log';if(!exists(p)){alert('No log yet','Run Check for Updates or Install & Play first.');return;}openPath(p);}
 function quitRequested(){if(!GT.task)return true;if(alert('An operation is running','Cancel it safely and close the launcher once the current safe step finishes?','Cancel and Quit','Keep Open')){GT.pendingQuit=true;requestCancel();}return false;}
 function configureCallbacks(){
-    ObjC.registerSubclass({name:'GTNativeController',superclass:'NSObject',protocols:['NSApplicationDelegate','NSWindowDelegate'],methods:{
+    ObjC.registerSubclass({name:'GTNativeController',superclass:'NSObject',methods:{
         'tick:':{types:['void',['id']],implementation:function(){
             if(GT.smoke){
                 appendUILog('UI smoke test passed');GT.timer.invalidate;GT.window.orderOut($());GT.app.stop($());
@@ -271,7 +271,9 @@ function run(argv){
         if(GT.smoke)return 'GROWTOPIA_UI_SMOKE_OK';
     } catch(e) {
         appendUILog('Startup: '+String(e));
-        try{var a=Application.currentApplication();a.includeStandardAdditions=true;a.displayAlert('Growtopia Launcher could not open',{message:String(e)+'\nSee ~/Library/Logs/Growtopia Launcher UI.log'});}catch(_){}
+        if(!GT.smoke){
+            try{var a=Application.currentApplication();a.includeStandardAdditions=true;a.displayAlert('Growtopia Launcher could not open',{message:String(e)+'\nSee ~/Library/Logs/Growtopia Launcher UI.log'});}catch(_){}
+        }
         throw e;
     }
 }
